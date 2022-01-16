@@ -1,51 +1,38 @@
+
 import React from "react";
-import {Routes, Route, Link} from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
+import { AuthGuard } from "./auth/AuthGuard";
+import { BrowserRouter } from "react-router-dom";
+import { createBrowserHistory } from "history";
+import NavRoute from "./NavRoute";
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-import Login from "./components/login";
-import Groups from "./components/groups";
+export const theme = createTheme({
+  palette: {
+    type: 'light',
+    primary: {
+      main: '#795548',
+    },
+    secondary: {
+      main: '#f50057',
+    },
+    info: {
+      main: '#795548',
+    },
+  },
+});
+
+export const history = createBrowserHistory({});
+
 function App() {
-  const [user, setUser] = React.useState(null);
-
-  // dummy login system for now
-  async function login(user = null) {
-    setUser(user);
-  }
-
-  async function logout() {
-    setUser(null);
-  }
-
   return (
-    <div>
-      <nav className="navbar navbar-expand navbar-dark bg-dark">
-        <a href="/coffee-chats" className="navbar-brand">
-          Coffee Chats
-        </a>
-        <div className="navbar-nav mr-auto">
-          <li className="nav-item">
-            <Link to={"/groups"} className="nav-link">
-              Groups
-            </Link>
-          </li>
-          <li className="nav-item" >
-            { user ? (
-              <a onClick={logout} className="nav-link" style={{cursor:'pointer'}}>
-                Logout {user.name}
-              </a>
-            ) : (            
-            <Link to={"/login"} className="nav-link">
-              Login
-            </Link>
-            )}
-
-          </li>
-        </div>
-      </nav>
-
-
-    </div>
+    <ThemeProvider theme={theme}>
+    <BrowserRouter>
+      <AuthGuard>
+        <NavRoute />
+      </AuthGuard>
+    </BrowserRouter>
+    </ThemeProvider>
   );
 }
-
 export default App;
