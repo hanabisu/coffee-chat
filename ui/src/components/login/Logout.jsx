@@ -1,11 +1,13 @@
 
 import React, { useContext } from "react";
-import { UserContext } from "../Context";
+import { UserContext } from "../../Context";
+import Button from '@mui/material/Button';
+
 export const Logout = () => {
     let User = useContext(UserContext);
     return (
       <div>
-        <button onClick={User.actions.handleLogout}>Logout</button>
+        <Button onClick={User.actions.handleLogout}>Logout</Button>
       </div>
     );
   };

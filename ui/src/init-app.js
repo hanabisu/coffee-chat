@@ -6,7 +6,7 @@ import * as Realm from "realm-web";
 
 // const mgDatabase ="";
       
-export const Application = new Realm.App({ id: "coffee-app-xslgo" });
+export const Application = new Realm.App({ id: "<app id>" });
 // export const Mongo = Application.services.mongodb(mgService);
 // export const collection = Mongo.db(mgDatabase).collection(
 //     mgcCllection
